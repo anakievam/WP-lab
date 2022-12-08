@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>SearchAll</title>
+</head>
+<body>
+<form th:method="POST">
+    <label for="text">Enter text:</label>
+    <input type="text" name="text" id="text"><br/>
+    <input type="submit" value="Submit"><br/>
+    <div th:if="${hasError}" th:text="${error}"></div>
+    <div th:if="${foundSmth}" th:text="${foundString}">
+    </div>
+</form>
+</body>
+</html>

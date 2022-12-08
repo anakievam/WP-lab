@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title>Add Course</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<form method="POST" action="/courses/add">
+    <h2>Add Course:</h2>
+    <input type="hidden" th:if="${course} != null" th:value="${course.courseId}" name="courseId">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" th:value="(${course} != null ? ${course.name} : '' )"
+           required placeholder="Enter course name">
+    <br/><br/>
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" th:value="(${course} != null ? ${course.description} : '' )"
+           required placeholder="Enter course description">
+    <br/><br/>
+    <label for="teacher">Teacher:</label>
+    <select id="teacher" name="teacherId">
+        <option
+                th:each="teacher : ${teachers}" th:text="${teacher.name}" th:value="${teacher.id}"
+        </option>
+    </select>
+    <br/><br/>
+    <button type="submit">Submit</button>
+</form>
+</html>

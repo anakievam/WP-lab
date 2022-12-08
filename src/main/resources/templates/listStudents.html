@@ -1,0 +1,73 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Add new Student to Course</title>
+    <style type = "text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+        table {
+            width:100%;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding:3px 2px;
+        }
+        section {
+            float: left;
+            margin: 0 1.5%;
+            width: 63%;
+        }
+        aside {
+            float: right;
+            margin: 0 1.5%;
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Student Enrollment - Select the Student </h1>
+</header>
+<section>
+    <h2>Select the student to enroll:</h2>
+    <a href='/createStudent' type='button'>Create New Student</a> <br/> <br/>
+    <form th:method="POST" th:action="@{/StudentEnrollmentSummary}">
+        <div th:each="student : ${students}">
+            <input th:type="radio" th:name="username" th:value="${student.username}" th:id="${student.username}">
+            <label th:for="${student.username}"><th:block th:text="${student.name} + ' '+ ${student.surname}"></th:block></label>
+        </div>
+        <br/>
+        <input type="submit" value="Submit">
+    </form>
+</section>
+
+<aside>
+    <table>
+        <tr>
+            <th colspan="2">
+                Your Enrollment Status
+            </th>
+        </tr>
+        <tr>
+            <td><b>Course Id</b></td>
+            <td th:text="${session.courseId}"></td>
+        </tr>
+    </table>
+</aside>
+
+<section>
+    <form th:method="POST" th:action="@{/AddStudent}">
+        <h2>Search student:</h2>
+        <input id="text" name="text" type="text"><br/><br/>
+        <input type="submit" value="Submit">
+    </form>
+    <div th:if="${session.found}">
+        <h2>Found Student:</h2><br/>
+        <div th:text="${session.studentName} +' '+ ${session.studentSurname} +' '+ ${session.studentUsername}"></div>
+    </div>
+</section>
+
+</body>
+</html>
